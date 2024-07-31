@@ -1,0 +1,14 @@
+.score-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.scoreboard, .highscore {
+    background-color: #29315a;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    flex-basis: 48%;
+    box-shadow: 0 0 10px rgba(106, 180, 222, 0.5);
+}

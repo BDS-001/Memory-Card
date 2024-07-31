@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import CardList from './Cards';
 import pokemonList from './PokemonList';
+import ScoreBoard from './ScoreBoard';
 import '../styles/App.css'
 
 async function fetchPokemonData(pokemon) {
@@ -37,6 +38,9 @@ function App() {
   const [cards, setCards] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [score, setScore] = useState(0)
+  const [highScore, setHighScore] = useState(0)
+
 
   function reShuffleCards() {
     setCards(shuffleCards(cards))
@@ -63,7 +67,8 @@ function App() {
 
   return (
     <>
-      <header><h1>Memory Game</h1></header>
+      <header><h1 className='title'>Pokemon Card Memory Game</h1></header>
+      <ScoreBoard score={score} highScore={highScore} />
       <CardList cards={cards} shuffle={reShuffleCards}/>
     </>
   )
