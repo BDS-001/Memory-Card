@@ -12,15 +12,28 @@ async function fetchPokemonData(pokemon) {
   return await response.json();
 }
 
+async function fetchSpeciesData(speciesUrl) {
+  const response = await fetch(speciesUrl);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+}
+
 async function processPokemonList(pokemonList) {
   const pokePromises = await pokemonList.map(pokemon => fetchPokemonData(pokemon))
   const pokemonData = await Promise.all(pokePromises)
-  return pokemonData.map(({ id, name, sprites, stats, types }) => ({
+  const fullPokemonData = await Promise.all(pokemonData.map(async (pokemon) => {
+    const speciesData = await fetchSpeciesData(pokemon.species.url);
+    return { ...pokemon, speciesData };
+  }));
+  return fullPokemonData.map(({ id, name, sprites, stats, types, speciesData }) => ({
     id,
     name,
     img: sprites.front_default,
     hp: stats.find(stat => stat.stat?.name === 'hp')?.base_stat,
-    types: types.map(type => type.type.name)
+    types: types.map(type => type.type.name),
+    description: speciesData.flavor_text_entries.find(entry => entry.language.name === 'en')?.flavor_text
   }));
 }
 

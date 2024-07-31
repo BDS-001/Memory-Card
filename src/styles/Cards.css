@@ -27,7 +27,7 @@
 }
 .pokemon-image {
     background-color: #c8e8f8;
-    height: 180px;
+    height: 140px;
     border-radius: 5px;
     margin: 10px 0;
     display: flex;
@@ -46,8 +46,9 @@
 .pokemon-info {
     background-color: #d9a517;
     border-radius: 5px;
-    padding: 10px;
+    padding: 5px;
     flex-grow: 1;
+    max-height: 156px;
 }
 
 .card-list {
@@ -62,4 +63,8 @@
     margin: 0 2px;
     border-radius: 8px;
     display: inline-block;
+}
+
+.poke-description {
+    font-size: 14px;
 }

@@ -21,28 +21,18 @@ const pokemonTypeColors = {
   fairy: "#D685AD"
 };
 
-function Card({ id, name, img, hp, types, onClick }) {
+function Card({ id, name, img, hp, types, description, onClick }) {
   return (
     <div data-id={id} className="pokemon-card" onClick={onClick}>
-      <div className="card-header">
+      <div className="card-header" style={{backgroundColor: pokemonTypeColors[types[0]]}}>
         <span><b>{name}</b></span>
         <span>HP: {hp}</span>
       </div>
       <div className="pokemon-image">
         <img src={img} alt={name} />
       </div>
-      <div className="pokemon-info">
-      <p>Type: {types.map(type => (
-          <span 
-            key={type}
-            className='pokemon-type' 
-            style={{backgroundColor: pokemonTypeColors[type]}}
-          >
-            {type}
-          </span>
-        ))}</p>
-        <p>Attack 1: Example Attack</p>
-        <p>Attack 2: Another Attack</p>
+      <div className="pokemon-info" style={{backgroundColor: pokemonTypeColors[types[0]]}}>
+        <p className='poke-description'>{description}</p>
       </div>
     </div>
   );
@@ -59,6 +49,7 @@ function CardList({ cards, cardClick}) {
           img={card.img} 
           hp={card.hp} 
           types={card.types}
+          description={card.description}
           onClick={cardClick}
         />
       ))}
