@@ -1,8 +1,8 @@
 import '/src/styles/Cards.css'
 
-function Card({ name, img, hp, types }) {
+function Card({ name, img, hp, types, onClick }) {
   return (
-    <div className="pokemon-card">
+    <div className="pokemon-card" onClick={onClick}>
       <div className="card-header">
         <span>{name}</span>
         <span>HP: {hp}</span>
@@ -19,7 +19,7 @@ function Card({ name, img, hp, types }) {
   );
 }
 
-function CardList({ cards }) {
+function CardList({ cards, shuffle }) {
   return (
     <div className="card-list">
       {cards.map((card) => (
@@ -28,7 +28,8 @@ function CardList({ cards }) {
           name={card.name} 
           img={card.img} 
           hp={card.hp} 
-          types={card.types} 
+          types={card.types}
+          onClick={shuffle}
         />
       ))}
     </div>

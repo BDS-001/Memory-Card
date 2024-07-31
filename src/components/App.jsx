@@ -38,6 +38,10 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  function reShuffleCards() {
+    setCards(shuffleCards(cards))
+  }
+
   useEffect(() => {
     async function getData() {
       try {
@@ -54,13 +58,13 @@ function App() {
     getData()
   }, [])
 
-  if (loading) return <div className="loading-screen">Loading...</div>
+  if (loading) return <div className="loading-screen"><h1>Loading...</h1></div>
   if (error) return <div className="error-screen">{error}</div>
 
   return (
     <>
       <header><h1>Memory Game</h1></header>
-      <CardList cards={cards} />
+      <CardList cards={cards} shuffle={reShuffleCards}/>
     </>
   )
 }
