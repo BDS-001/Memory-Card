@@ -56,3 +56,10 @@
     gap: 30px;
     justify-content: center;
 }
+
+.pokemon-type {
+    min-width: 68px;
+    margin: 0 2px;
+    border-radius: 8px;
+    display: inline-block;
+}
