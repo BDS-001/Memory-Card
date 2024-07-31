@@ -21,9 +21,9 @@ const pokemonTypeColors = {
   fairy: "#D685AD"
 };
 
-function Card({ name, img, hp, types, onClick }) {
+function Card({ id, name, img, hp, types, onClick }) {
   return (
-    <div className="pokemon-card" onClick={onClick}>
+    <div data-id={id} className="pokemon-card" onClick={onClick}>
       <div className="card-header">
         <span><b>{name}</b></span>
         <span>HP: {hp}</span>
@@ -48,17 +48,18 @@ function Card({ name, img, hp, types, onClick }) {
   );
 }
 
-function CardList({ cards, shuffle }) {
+function CardList({ cards, cardClick}) {
   return (
     <div className="card-list">
       {cards.map((card) => (
         <Card 
-          key={card.id} 
+          key={card.id}
+          id={card.id}
           name={card.name} 
           img={card.img} 
           hp={card.hp} 
           types={card.types}
-          onClick={shuffle}
+          onClick={cardClick}
         />
       ))}
     </div>

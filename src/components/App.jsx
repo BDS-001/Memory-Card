@@ -15,7 +15,6 @@ async function fetchPokemonData(pokemon) {
 async function processPokemonList(pokemonList) {
   const pokePromises = await pokemonList.map(pokemon => fetchPokemonData(pokemon))
   const pokemonData = await Promise.all(pokePromises)
-  console.log(pokemonData[0])
   return pokemonData.map(({ id, name, sprites, stats, types }) => ({
     id,
     name,
@@ -40,9 +39,18 @@ function App() {
   const [error, setError] = useState(null)
   const [score, setScore] = useState(0)
   const [highScore, setHighScore] = useState(0)
+  const [usedCards, setUsedCards] = useState(new Set)
 
 
-  function reShuffleCards() {
+  function cardClick(e) {
+    const cardId = e.currentTarget.dataset.id
+    if (usedCards.has(cardId)) {
+      if (score > highScore) setHighScore(score)
+      setScore(0)
+    } else {
+      setScore(prevScore => prevScore + 1)
+      setUsedCards(prevCards => new Set(prevCards).add(cardId))
+    }
     setCards(shuffleCards(cards))
   }
 
@@ -69,7 +77,7 @@ function App() {
     <>
       <header><h1 className='title'>Pokemon Card Memory Game</h1></header>
       <ScoreBoard score={score} highScore={highScore} />
-      <CardList cards={cards} shuffle={reShuffleCards}/>
+      <CardList cards={cards} cardClick={cardClick} />
     </>
   )
 }
