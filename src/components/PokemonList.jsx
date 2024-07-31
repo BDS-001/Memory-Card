@@ -1,14 +1,12 @@
-const pokemonList = [
-    "pikachu",
-    "charizard",
-    "bulbasaur",
-    "squirtle",
-    "eevee",
-    "mewtwo",
-    "snorlax",
-    "jigglypuff",
-    "gyarados",
-    "gengar"
-  ]
+function genRandomPoke(count) {
+    const randomNumbers = [];
+    for (let i = 0; i < count; i++) {
+      const randomNumber = Math.floor(Math.random() * 1025) + 1;
+      randomNumbers.push(randomNumber);
+    }
+    return randomNumbers;
+  }
 
-  export default pokemonList
+const pokemonList = genRandomPoke(8)
+
+export default pokemonList

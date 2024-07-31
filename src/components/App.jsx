@@ -14,10 +14,13 @@ async function fetchPokemonData(pokemon) {
 async function processPokemonList(pokemonList) {
   const pokePromises = await pokemonList.map(pokemon => fetchPokemonData(pokemon))
   const pokemonData = await Promise.all(pokePromises)
-  return pokemonData.map(({ id, name, sprites }) => ({
+  console.log(pokemonData[0])
+  return pokemonData.map(({ id, name, sprites, stats, types }) => ({
     id,
     name,
     img: sprites.front_default,
+    hp: stats.find(stat => stat.stat?.name === 'hp')?.base_stat,
+    types: types.map(type => type.type.name)
   }));
 }
 
