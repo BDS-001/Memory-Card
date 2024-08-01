@@ -66,5 +66,11 @@
 }
 
 .poke-description {
-    font-size: 14px;
+    font-size: 16px; /* starting font size */
+    line-height: 1.2;
+    height: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }

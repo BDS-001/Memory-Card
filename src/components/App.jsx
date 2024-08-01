@@ -88,7 +88,7 @@ function App() {
 
   return (
     <>
-      <header><h1 className='title'>Pokemon Card Memory Game</h1></header>
+      <header><h1 className='title'>Pokémon Card Memory Game</h1></header>
       <ScoreBoard score={score} highScore={highScore} />
       <CardList cards={cards} cardClick={cardClick} />
     </>
