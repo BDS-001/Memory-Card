@@ -52,6 +52,7 @@ function App() {
     if (usedCards.has(cardId)) {
       if (score > highScore) setHighScore(score)
       setScore(0)
+      setUsedCards(new Set)
     } else {
       setScore(prevScore => prevScore + 1)
       setUsedCards(prevCards => new Set(prevCards).add(cardId))
