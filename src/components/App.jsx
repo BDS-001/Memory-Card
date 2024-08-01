@@ -4,16 +4,8 @@ import pokemonList from './PokemonList';
 import ScoreBoard from './ScoreBoard';
 import '../styles/App.css'
 
-async function fetchPokemonData(pokemon) {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return await response.json();
-}
-
-async function fetchSpeciesData(speciesUrl) {
-  const response = await fetch(speciesUrl);
+async function fetchPokemonData(url) {
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -21,10 +13,10 @@ async function fetchSpeciesData(speciesUrl) {
 }
 
 async function processPokemonList(pokemonList) {
-  const pokePromises = await pokemonList.map(pokemon => fetchPokemonData(pokemon))
+  const pokePromises = await pokemonList.map(pokemon => fetchPokemonData(`https://pokeapi.co/api/v2/pokemon/${pokemon}`))
   const pokemonData = await Promise.all(pokePromises)
   const fullPokemonData = await Promise.all(pokemonData.map(async (pokemon) => {
-    const speciesData = await fetchSpeciesData(pokemon.species.url);
+    const speciesData = await fetchPokemonData(pokemon.species.url);
     return { ...pokemon, speciesData };
   }));
   return fullPokemonData.map(({ id, name, sprites, stats, types, speciesData }) => ({
