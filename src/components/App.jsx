@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import CardList from './Cards';
 import pokemonList from './PokemonList';
 import ScoreBoard from './ScoreBoard';
+import Rules from './Rules'
 import '../styles/App.css'
 
 async function fetchPokemonData(url) {
@@ -82,6 +83,7 @@ function App() {
   return (
     <>
       <header><h1 className='title'>Pokémon Card Memory Game</h1></header>
+      <Rules/>
       <ScoreBoard score={score} highScore={highScore} />
       <CardList cards={cards} cardClick={cardClick} />
     </>
